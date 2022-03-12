@@ -1,0 +1,14 @@
+{
+  "name": "english-morphology",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Joelle Plow <joelleplow@aol.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "yarn jest"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.3"
+  }
+}
