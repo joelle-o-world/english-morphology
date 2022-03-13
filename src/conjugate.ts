@@ -12,9 +12,9 @@ import {
 import {
   deconjugateIrregular,
   getIrregularConjugation,
-} from "../util/irregularConjugations";
+} from "./irregularConjugations";
 
-export const regularVerbConjugation: Morphology = {
+export const regularVerbConjugation: Morphology<string> = {
   // Conjugate the infinitive
   infinitive: {
     firstPersonSingular: (infinitive) => infinitive,
@@ -151,15 +151,13 @@ export const regularVerbConjugation: Morphology = {
   },
 };
 
-export type VerbForm = string;
-
 export function conjugate(infinitive: string, person: VerbForm) {
   const irreg = getIrregularConjugation(infinitive, formNames.indexOf(person));
   if (irreg) return irreg;
   return regularVerbConjugation.infinitive[person](infinitive);
 }
 
-export function getConjugationTable(infinitive: string) {
+export function conjugationTable(infinitive: string) {
   const table: { [form: string]: string } = {};
   console.log(regularVerbConjugation.infinitive);
   for (let form in regularVerbConjugation.infinitive)
@@ -179,7 +177,8 @@ const formNames = [
   "gerund",
   "pastParticiple",
   "pastTense",
-];
+] as const;
+export type VerbForm = typeof formNames[number];
 
 const conjugationForms = [
   "firstPersonSingular",
@@ -219,11 +218,11 @@ export function deconjugateConcise(
   word: string
 ): { forms: VerbForm[]; infinitive: string }[] {
   const table: {
-    [infinitive: string]: { forms: string[]; infinitive: string };
+    [infinitive: string]: { forms: VerbForm[]; infinitive: string };
   } = {};
   for (let { form, infinitive } of deconjugate(word)) {
-    if (table[infinitive]) table[infinitive].forms.push(form);
-    else table[infinitive] = { forms: [form], infinitive };
+    if (table[infinitive]) table[infinitive].forms.push(form as VerbForm);
+    else table[infinitive] = { forms: [form as VerbForm], infinitive };
   }
   return Object.values(table);
 }

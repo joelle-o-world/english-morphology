@@ -67,7 +67,7 @@ export const regularPluralisation: Morphology = {
   },
 };
 
-export function pluralise(singularNoun: string) {
+export function plural(singularNoun: string) {
   let plural = regularPluralisation.singular.plural(singularNoun);
   if (!plural) return [];
   else if (typeof plural == "string") return [plural];
@@ -76,7 +76,7 @@ export function pluralise(singularNoun: string) {
   // ^^ All this iffy nonsense to future proof for ambiguous morphology transformations
 }
 
-export function singularise(pluralNoun: string) {
+export function singular(pluralNoun: string) {
   let singular = regularPluralisation.plural.singular(pluralNoun);
   if (!singular) return [];
   else if (typeof singular == "string") return [singular];
@@ -84,3 +84,6 @@ export function singularise(pluralNoun: string) {
 
   // ^^ All this iffy nonsense to future proof for ambiguous morphology transformations
 }
+
+// @deprecated
+export { singular as singularise, plural as pluralise };

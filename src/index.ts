@@ -1,8 +1,8 @@
-export interface Morphology {
-  [fromPos: string]: {
-    [toPos: string]: (before: string) => string | string[] | null;
+export type Morphology<Form extends string = string> = {
+  [fromPos in Form]: {
+    [toPos in Form]: (before: string) => string | string[] | null;
   };
-}
+};
 
 export type MorphologyRelation = {
   form: string;
