@@ -5,6 +5,8 @@ describe("Plural & Singular nouns", () => {
     cat: "cats",
     sheep: "sheep",
     fish: "fishes",
+    woman: "women",
+    man: "men",
   })) {
     test(`The plural of '${sing}' is '${plur}'`, () => {
       expect(plural(sing)).toContain(plur);

@@ -1,4 +1,5 @@
 import { Morphology } from "./";
+import { irregularPlurals, irregularSingulars } from "./irregularPlurals";
 
 export const regularPluralisation: Morphology = {
   singular: {
@@ -68,6 +69,7 @@ export const regularPluralisation: Morphology = {
 };
 
 export function plural(singularNoun: string) {
+  if (irregularPlurals[singularNoun]) return irregularPlurals[singularNoun];
   let plural = regularPluralisation.singular.plural(singularNoun);
   if (!plural) return [];
   else if (typeof plural == "string") return [plural];
@@ -77,6 +79,8 @@ export function plural(singularNoun: string) {
 }
 
 export function singular(pluralNoun: string) {
+  if (irregularSingulars[pluralNoun]) return irregularSingulars[pluralNoun];
+
   let singular = regularPluralisation.plural.singular(pluralNoun);
   if (!singular) return [];
   else if (typeof singular == "string") return [singular];
