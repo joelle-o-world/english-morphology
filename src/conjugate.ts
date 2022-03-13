@@ -1,4 +1,4 @@
-import { Morphology } from "./";
+import { Morphology } from "./basic-types";
 import {
   endsWithOOrX,
   endsWithE,
@@ -151,7 +151,17 @@ export const regularVerbConjugation: Morphology<string> = {
   },
 };
 
-export function conjugate(infinitive: string, person: VerbForm) {
+/** Conjugate an english verb */
+export function conjugate(
+  /**
+   * The verb in infinitive form
+   */
+  infinitive: string,
+  /**
+   * The form into which to conjugate the verb.
+   */
+  person: VerbForm
+) {
   const irreg = getIrregularConjugation(infinitive, formNames.indexOf(person));
   if (irreg) return irreg;
   return regularVerbConjugation.infinitive[person](infinitive);
@@ -227,7 +237,7 @@ export function deconjugateConcise(
   return Object.values(table);
 }
 
-export interface Deconjugation {
+interface Deconjugation {
   infinitive: string;
   conjugated: string;
   couldBePlural: boolean;

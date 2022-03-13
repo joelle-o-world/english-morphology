@@ -1,10 +1,10 @@
-import { Morphology } from "./";
+import { Morphology } from "./basic-types";
 import { irregularPlurals, irregularSingulars } from "./irregularPlurals";
 
-export const regularPluralisation: Morphology = {
+export const regularPluralisation = {
   singular: {
     /** singular --> plural */
-    plural(singular) {
+    plural(singular: string) {
       // If the singular noun ends in -o, ‑s, -ss, -sh, -ch, -x, or -z, add ‑es
       if (/(o|s|ss|sh|ch|x|z)$/i.test(singular)) return singular + "es";
 
@@ -34,7 +34,7 @@ export const regularPluralisation: Morphology = {
 
   plural: {
     /** plural --> singular */
-    singular(plural) {
+    singular(plural: string) {
       // If the plural noun ends -ies, replace with -y
       if (/ies$/.test(plural)) return plural.slice(0, -3) + "y";
 
@@ -89,5 +89,5 @@ export function singular(pluralNoun: string) {
   // ^^ All this iffy nonsense to future proof for ambiguous morphology transformations
 }
 
-// @deprecated
+/** @deprecated */
 export { singular as singularise, plural as pluralise };

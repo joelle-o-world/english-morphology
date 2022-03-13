@@ -1,4 +1,5 @@
-import { conjugate, VerbForm } from ".";
+import { conjugate } from ".";
+import { VerbForm } from "./conjugate";
 
 describe("Conjugating verbs", () => {
   test.each([
